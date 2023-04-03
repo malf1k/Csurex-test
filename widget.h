@@ -5,23 +5,17 @@
 #include <QGraphicsView>
 #include <QFileDialog>
 
+class QGraphicsScene;
+
 class Widget : public QWidget
 {
     Q_OBJECT
 
 public slots:
-    void LoadButtonClicked()
-    {
-        QString file_name = QFileDialog::getOpenFileName(this);
-        imgs.load(file_name);
+    void LoadButtonClicked(); // реализацию функций следует писать в cpp файлах
+    // ShowImage yне должна возвращать значение, разве что булевое, сигнализирующее об успешности выполнения
+    /*QPixmap*/ void ShowImage(); // реализацию функций следует писать в cpp файлах
 
-    }
-
-    QPixmap ShowImage()
-    {
-        QPixmap imgs(file_name);
-        return imgs;
-    }
 public:
 
     Widget(QWidget *parent = nullptr);
@@ -29,6 +23,7 @@ public:
 
     QString file_name;
     QPixmap imgs;
-
+    QGraphicsScene *scene_for_view = nullptr;
+    QGraphicsView * view = nullptr;
 };
 #endif // WIDGET_H
